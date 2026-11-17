@@ -24,7 +24,7 @@ cpu_kernel=$(echo "$vmstat_mb" | awk '{print $14}' | tail -n1 | xargs)
 
 #parse disk io and space availability
 disk_io=$(vmstat -d | awk '{print $10}' | tail -n1 | xargs)
-disk_available=$(df -BM / | awk 'NR==2 {print $4}' | xargs)
+disk_available=$(df -BM / | awk 'NR==2 {print $4}' | tr -d 'M')
 
 #get current time
 timestamp=$(vmstat -t | awk 'END {print $(NF-1), $NF}')
